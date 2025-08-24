@@ -1,0 +1,87 @@
+import java.util.Scanner;
+public class Main {
+    private int[] stack_Arr;
+    private int top = -1;
+    private int MAX;
+
+    public Main(int size) {
+        this.MAX = size;
+        stack_Arr = new int[MAX];
+    }
+
+    public void push(int data) {
+        if (top == MAX - 1) {
+            System.out.println("Stack Overflow: Cannot push " + data);
+        } else {
+            stack_Arr[++top] = data;
+            System.out.println(data + " pushed to stack.");
+        }
+        displayStack();
+    }
+
+    public void pop() {
+        if (top == -1) {
+            System.out.println("Stack Underflow: Cannot pop.");
+        } else {
+            System.out.println(stack_Arr[top--] + " popped from stack.");
+        }
+        displayStack();
+    }
+
+    public void peek() {
+        if (top == -1) {
+            System.out.println("Stack is empty.");
+        } else {
+            System.out.println("Top element is " + stack_Arr[top]);
+        }
+        displayStack();
+    }
+
+    public void displayStack() {
+        if (top == -1) {
+            System.out.println("Stack is empty.");
+        } else {
+            System.out.print("Current Stack: ");
+            for (int i = 0; i <= top; i++) {
+                System.out.print(stack_Arr[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter size of stack: ");
+        int size = scanner.nextInt();
+        Main stack = new Main(size);
+
+        while (true) {
+            System.out.println("\nStack Operations Menu:");
+            System.out.println("1. Push");
+            System.out.println("2. Pop");
+            System.out.println("3. Peek");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option (1-4): ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter data to push: ");
+                    stack.push(scanner.nextInt());
+                    break;
+                case 2:
+                    stack.pop();
+                    break;
+                case 3:
+                    stack.peek();
+                    break;
+                case 4:
+                    System.out.println("Exiting program...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Choose between 1-4.");
+            }
+        }
+    }
+}
